@@ -1,34 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-
-
-// //const PredictionComponent = () => {
-//   // State to store the result of the API call or any other data
-//   const [result, setResult] = useState(null);
-
-//   // This useEffect will run once when the component is mounted
-//   useEffect(() => {
-//       console.log("Component mounted");
-//   }, []); // Empty dependency array means this runs only once when the component mounts
-
-//   // This useEffect can be used to simulate data fetching or making an API call
-//   useEffect(() => {
-//       // Simulate API call or data fetch
-//       setTimeout(() => {
-//           setResult('Some Data'); // Setting the result after a simulated delay
-//       }, 1000); // Simulated delay of 1 second
-//   }, []); // Also runs only once when the component mounts
-
-//   return (
-//       <div>
-//           <h1>Prediction Result:</h1>
-//           {/* Check if result is available, if not show loading */}
-//           {result ? <p>{result}</p> : <p>Loading...</p>}
-//       </div>
-//   );
-// };
-
-// export default PredictionComponent;
+import logo from 'C:\\Users\\Sumit\\OneDrive\\Desktop\\brest cancer\\breast-cancer-frontend\\src\\logoapp.png';  // Import the logo
+import awarenessImage from 'C:\\Users\\Sumit\\OneDrive\\Desktop\\brest cancer\\breast-cancer-frontend\\src\\awar.png';  // Import a real image
 
 function App() {
   const [formData, setFormData] = useState({
@@ -41,11 +14,6 @@ function App() {
   });
   const [result, setResult] = useState(null);
 
-  useEffect(() => {
-    console.log("Component mounted");
-  }, []); 
-
-  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -54,7 +22,6 @@ function App() {
     });
   };
 
-  // Handle form submit to make the prediction request
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch('http://127.0.0.1:5000/predict', {
@@ -65,79 +32,108 @@ function App() {
       body: JSON.stringify(formData)
     })
       .then((response) => response.json())
-      .then(data => {
-        console.log(data); // Log the response from the server
-        setResult(data.prediction); // Assuming your API returns a field 'prediction'
-      })  // Check if data is being logged
-      .catch(error => console.error('Error:', error));
+      .then((data) => {
+        if (data.prediction === 1) {
+          setResult("Malignant (Cancer found, take doctor's prescription)");
+        } else {
+          setResult("Benign (Not cancer, just an unusual growth of tissue)");
+        }
+      })
+      .catch((error) => console.error('Error:', error));
   };
 
   return (
     <div className="App">
-      <h1>Breast Cancer Diagnosis Prediction</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Radius Mean:</label>
-          <input
-            type="text"
-            name="radius_mean"
-            value={formData.radius_mean}
-            onChange={handleChange}
-          />
+      {/* Awareness Section */}
+      <div className="awareness-section">
+        <img src={awarenessImage} alt="Breast Cancer Awareness" className="awareness-image" />
+        <div className="awareness-text">
+          <h2>Breast Cancer Awareness</h2>
+          <p>Breast cancer is one of the most common cancers in women. Early detection can save lives. Make sure to schedule regular checkups and perform self-examinations.</p>
+          <p>Breast cancer awareness isn't just about wearing pink; it's about understanding the journey, sharing the stories, and supporting the warriors. Early detection saves lives, and being informed can empower us all. By spreading awareness and encouraging regular check-ups, we stand together against this formidable opponent. Let's honor the fighters, survivors, and loved ones we've lost, and commit to a future where every ribbon represents not just hope, but triumph</p>
+          <p>Stay informed, spread awareness, and take charge of your health!</p>
         </div>
-        <div>
-          <label>Perimeter Mean:</label>
-          <input
-            type="text"
-            name="perimeter_mean"
-            value={formData.perimeter_mean}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Area Mean:</label>
-          <input
-            type="text"
-            name="area_mean"
-            value={formData.area_mean}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Compactness Mean:</label>
-          <input
-            type="text"
-            name="compactness_mean"
-            value={formData.compactness_mean}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Concave Points Mean:</label>
-          <input
-            type="text"
-            name="concave_points_mean"
-            value={formData.concave_points_mean}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Area Worst:</label>
-          <input
-            type="text"
-            name="area_worst"
-            value={formData.area_worst}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Predict Diagnosis</button>
-      </form>
+      </div>
 
-      {result && (
-        <div className="result">
-          <h2>Prediction Result: {result}</h2>
-        </div>
-      )}
+      {/* Form Section */}
+      <div className="form-container">
+        <header className="App-header">
+          <img src={logo} alt="Breast Cancer AI Prediction" className="App-logo" />
+          <h1>AI-Based Breast Cancer Diagnosis</h1>
+          <p>Instant predictions based on your medical data.</p>
+        </header>
+
+        <form onSubmit={handleSubmit} className="prediction-form">
+          <div className="form-group">
+            <label>Radius Mean:</label>
+            <input
+              type="text"
+              name="radius_mean"
+              value={formData.radius_mean}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Perimeter Mean:</label>
+            <input
+              type="text"
+              name="perimeter_mean"
+              value={formData.perimeter_mean}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Area Mean:</label>
+            <input
+              type="text"
+              name="area_mean"
+              value={formData.area_mean}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Compactness Mean:</label>
+            <input
+              type="text"
+              name="compactness_mean"
+              value={formData.compactness_mean}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Concave Points Mean:</label>
+            <input
+              type="text"
+              name="concave_points_mean"
+              value={formData.concave_points_mean}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Area Worst:</label>
+            <input
+              type="text"
+              name="area_worst"
+              value={formData.area_worst}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit" className="submit-button">Predict Diagnosis</button>
+        </form>
+
+        {result && (
+          <div className={`result ${result.includes("Malignant") ? "malignant" : "benign"}`}>
+            <h2>Prediction Result:</h2>
+            <p>{result}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
