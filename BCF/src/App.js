@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import logo from 'C:\\Users\\Sumit\\OneDrive\\Desktop\\brest cancer\\breast-cancer-frontend\\src\\logoapp.png';  // Import the logo
-import awarenessImage from 'C:\\Users\\Sumit\\OneDrive\\Desktop\\brest cancer\\breast-cancer-frontend\\src\\awar.png';  // Import a real image
+import logo from 'C:\\Users\\Sumit\\OneDrive\\Desktop\\brest cancer\\BCF\\src\\logoapp.png';  // Import the logo
+import awarenessImage from 'C:\\Users\\Sumit\\OneDrive\\Desktop\\brest cancer\\BCF\\src\\awar.png';  // Import a real image
 
 function App() {
   const [formData, setFormData] = useState({
