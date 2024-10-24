@@ -24,13 +24,14 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://127.0.0.1:5000/predict', {
+    fetch('/api/predict', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(formData),
     })
+    
       .then((response) => response.json())
       .then((data) => {
         if (data.prediction === 1) {
