@@ -155,5 +155,5 @@ wcwidth==0.2.13
 weasel==0.4.1
 Werkzeug==3.0.3
 wheel==0.44.0
-wrapt==1.16.0
+wrapt==1.12.1
 zipp==3.20.0
