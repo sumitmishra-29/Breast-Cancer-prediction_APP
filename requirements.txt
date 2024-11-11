@@ -56,7 +56,6 @@ joblib==1.4.2
 jupyter_client==8.6.2
 jupyter_core==5.7.2
 kagglehub==0.2.9
-keras==3.5.0
 keras-core==0.1.7
 keras-cv==0.9.0
 keras-models==0.0.7
